@@ -1,1 +1,252 @@
+<!DOCTYPE html>
+<html lang="ta">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+G THE GENIUS | Student Register
+</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+<div class="logo">
+🛡️ G THE GENIUS
+<span>Student Registration</span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="login.html">Login</a>
+</nav>
+
+</header>
+
+
+
+
+<section class="hero">
+
+
+<div class="hero-card">
+
+
+<h2>
+📝 Create Account
+</h2>
+
+
+
+<input 
+id="name"
+type="text"
+placeholder="Enter Name"
+>
+
+
+
+<input 
+id="district"
+type="text"
+placeholder="Enter District"
+>
+
+
+
+<input 
+id="email"
+type="email"
+placeholder="Enter Email"
+>
+
+
+
+<input 
+id="password"
+type="password"
+placeholder="Create Password"
+>
+
+
+
+
+<button 
+class="btn gold"
+id="registerBtn">
+
+Register
+
+</button>
+
+
+
+<p style="margin-top:20px">
+
+Already Account?
+
+<a href="login.html" style="color:#facc15">
+
+Login
+
+</a>
+
+</p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<script type="module">
+
+
+import { auth, db } 
+from "./firebase-config.js";
+
+
+
+import {
+
+createUserWithEmailAndPassword
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+import {
+
+doc,
+setDoc
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+
+
+
+document
+.getElementById("registerBtn")
+.addEventListener("click",async()=>{
+
+
+
+const name =
+document.getElementById("name").value;
+
+
+const district =
+document.getElementById("district").value;
+
+
+const email =
+document.getElementById("email").value;
+
+
+const password =
+document.getElementById("password").value;
+
+
+
+
+
+try{
+
+
+const userCredential =
+await createUserWithEmailAndPassword(
+
+auth,
+email,
+password
+
+);
+
+
+
+const uid =
+userCredential.user.uid;
+
+
+
+
+
+await setDoc(
+
+doc(db,"students",uid),
+
+{
+
+name:name,
+
+district:district,
+
+email:email,
+
+score:0,
+
+createdAt:new Date()
+
+}
+
+);
+
+
+
+
+
+alert("Registration Successful");
+
+
+window.location.href="login.html";
+
+
+
+}
+
+catch(error){
+
+
+alert(error.message);
+
+
+}
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
