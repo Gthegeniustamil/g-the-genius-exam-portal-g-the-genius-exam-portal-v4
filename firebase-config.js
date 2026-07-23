@@ -1,69 +1,31 @@
-/*
-G THE GENIUS TNUSRB EXAM PORTAL V4
-Firebase Configuration File
-*/
-
-
-// Firebase SDK imports
-// Firebase Console-ல் உங்கள் Project உருவாக்கிய பிறகு
-// கீழே உள்ள values-ஐ மாற்ற வேண்டும்
-
-
-import { initializeApp } from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-
-import { 
-getAuth 
-} from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-import { 
-getFirestore 
-} from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
 
+apiKey: "AIzaSyAapQ1fRLiFQ6zcd5gFUpvcXfQBVBSdeH8",
 
-apiKey: "YOUR_API_KEY",
+authDomain: "g-the-genius-tnusrb-portal.firebaseapp.com",
 
-authDomain: "YOUR_PROJECT.firebaseapp.com",
+projectId: "g-the-genius-tnusrb-portal",
 
-projectId: "YOUR_PROJECT_ID",
+storageBucket: "g-the-genius-tnusrb-portal.firebasestorage.app",
 
-storageBucket: "YOUR_PROJECT.appspot.com",
+messagingSenderId: "749969114917",
 
-messagingSenderId: "YOUR_SENDER_ID",
-
-appId: "YOUR_APP_ID"
-
+appId: "1:749969114917:web:5c61bcb7c8da98fef2bccc"
 
 };
-
-
-
-
-
-// Initialize Firebase
 
 
 const app = initializeApp(firebaseConfig);
 
 
-
 const auth = getAuth(app);
 
-
 const db = getFirestore(app);
-
-
-
 
 
 export { auth, db };
