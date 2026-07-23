@@ -1,1 +1,250 @@
+<!DOCTYPE html>
+<html lang="ta">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+G THE GENIUS | Result
+</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+<div class="logo">
+
+🛡️ G THE GENIUS
+
+<span>
+Exam Result
+</span>
+
+</div>
+
+
+<nav>
+
+<a href="index.html">
+Home
+</a>
+
+<a href="leaderboard.html">
+Leaderboard
+</a>
+
+</nav>
+
+</header>
+
+
+
+
+
+<section class="features">
+
+
+<h2>
+🏆 Your Mock Test Result
+</h2>
+
+
+
+<div class="glass-card">
+
+
+<h3 id="score">
+Calculating...
+</h3>
+
+
+<p id="details"></p>
+
+
+
+<a href="mocktest.html" class="btn gold">
+Try Again
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="glass-card">
+
+
+<h2>
+Answer Review
+</h2>
+
+
+<div id="review">
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<script>
+
+
+let questions=[];
+
+let userAnswers=[];
+
+
+
+fetch("questions.json")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+
+questions=data.slice(0,20);
+
+
+userAnswers=
+JSON.parse(localStorage.getItem("answers")) || [];
+
+
+showResult();
+
+
+});
+
+
+
+
+
+
+function showResult(){
+
+
+let correct=0;
+
+
+questions.forEach((q,index)=>{
+
+
+if(userAnswers[index]===q.answer){
+
+correct++;
+
+}
+
+
+});
+
+
+
+let wrong =
+questions.length-correct;
+
+
+
+let percentage =
+(correct/questions.length)*100;
+
+
+
+
+
+document.getElementById("score").innerHTML=
+
+`Score : ${correct} / ${questions.length}`;
+
+
+
+document.getElementById("details").innerHTML=
+
+`
+Correct : ${correct}<br>
+Wrong : ${wrong}<br>
+Percentage : ${percentage.toFixed(2)}%
+`;
+
+
+
+
+
+let review="";
+
+
+
+questions.forEach((q,index)=>{
+
+
+review += `
+
+<div class="glass-card">
+
+<h3>
+${index+1}. ${q.question}
+</h3>
+
+
+<p>
+Your Answer:
+${userAnswers[index] || "Not Answered"}
+</p>
+
+
+<p>
+Correct Answer:
+${q.answer}
+</p>
+
+
+<p>
+Explanation:
+${q.explanation}
+</p>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+
+document.getElementById("review").innerHTML=review;
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
