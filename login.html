@@ -1,1 +1,183 @@
+<!DOCTYPE html>
+<html lang="ta">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>G THE GENIUS | Student Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+<div class="logo">
+🛡️ G THE GENIUS
+<span>Student Portal</span>
+</div>
+
+
+<nav>
+
+<a href="index.html">
+Home
+</a>
+
+</nav>
+
+
+</header>
+
+
+
+
+
+<section class="hero">
+
+
+<div class="hero-card">
+
+
+<h2>
+🔐 Student Login
+</h2>
+
+
+
+<input 
+type="email"
+id="email"
+placeholder="Enter Email"
+>
+
+
+
+<input 
+type="password"
+id="password"
+placeholder="Enter Password"
+>
+
+
+
+<button class="btn gold" id="loginBtn">
+
+Login
+
+</button>
+
+
+
+<p style="margin-top:20px;">
+
+New Student?
+
+<a href="#" style="color:#facc15">
+
+Register
+
+</a>
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<script type="module">
+
+
+import { auth } from "./firebase-config.js";
+
+
+import {
+
+signInWithEmailAndPassword
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+
+
+const loginBtn = document.getElementById("loginBtn");
+
+
+
+
+
+loginBtn.addEventListener("click",()=>{
+
+
+const email =
+document.getElementById("email").value;
+
+
+
+const password =
+document.getElementById("password").value;
+
+
+
+
+
+signInWithEmailAndPassword(
+
+auth,
+
+email,
+
+password
+
+)
+
+.then(()=>{
+
+
+alert("Login Successful");
+
+
+window.location.href="mocktest.html";
+
+
+})
+
+
+.catch(error=>{
+
+
+alert(error.message);
+
+
+});
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
