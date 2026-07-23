@@ -4,16 +4,13 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-G THE GENIUS | Mock Test
+G THE GENIUS | TNUSRB Mock Test
 </title>
 
-
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 
@@ -23,33 +20,18 @@ G THE GENIUS | Mock Test
 
 <header class="navbar">
 
-
 <div class="logo">
-
 🛡️ G THE GENIUS
-
-<span>
-TNUSRB MOCK TEST
-</span>
-
+<span>TNUSRB MOCK TEST</span>
 </div>
 
 
 <nav>
-
-<a href="index.html">
-Home
-</a>
-
-<a href="leaderboard.html">
-Rank
-</a>
-
+<a href="index.html">Home</a>
+<a href="leaderboard.html">Rank</a>
 </nav>
 
-
 </header>
-
 
 
 
@@ -57,23 +39,21 @@ Rank
 <section class="features">
 
 
-
 <h2>
-TNUSRB Online Mock Test
+🚔 TNUSRB Online Examination
 </h2>
 
 
 
+<!-- Timer -->
 
 <div class="glass-card">
-
 
 <h3>
 ⏱️ Time Left :
 <span id="timer">
 20:00
 </span>
-
 </h3>
 
 
@@ -83,15 +63,57 @@ TNUSRB Online Mock Test
 
 
 
+<!-- Progress -->
+
+
 <div class="glass-card">
 
+<div id="progressBar">
 
 <div id="progress">
 
-Question 1 / 20
+0%
 
 </div>
 
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- Question Palette -->
+
+
+<div class="glass-card">
+
+
+<h3>
+Question Palette
+</h3>
+
+
+<div id="palette">
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Question -->
+
+
+<div class="glass-card">
 
 
 <h2 id="question">
@@ -102,9 +124,7 @@ Loading Question...
 
 
 
-
 <div id="options">
-
 
 </div>
 
@@ -117,7 +137,7 @@ Loading Question...
 
 <button class="btn" id="previous">
 
-Previous
+⬅ Previous
 
 </button>
 
@@ -125,7 +145,7 @@ Previous
 
 <button class="btn gold" id="next">
 
-Next
+Next ➡
 
 </button>
 
@@ -133,19 +153,16 @@ Next
 
 <button class="btn" id="submit">
 
-Submit
+Submit Exam
 
 </button>
 
 
-
 </div>
 
 
 
 </div>
-
-
 
 
 
@@ -155,250 +172,7 @@ Submit
 
 
 
-
-
-
-<script type="module">
-
-
-let questions=[];
-
-let currentQuestion=0;
-
-let answers=[];
-
-let time=1200;
-
-
-
-
-
-const questionBox =
-document.getElementById("question");
-
-
-const optionsBox =
-document.getElementById("options");
-
-
-const progress =
-document.getElementById("progress");
-
-
-
-
-
-
-// Load Questions
-
-
-fetch("questions.json")
-
-.then(response=>response.json())
-
-.then(data=>{
-
-
-questions =
-data.sort(()=>Math.random()-0.5)
-.slice(0,20);
-
-
-
-showQuestion();
-
-
-});
-
-
-
-
-
-
-function showQuestion(){
-
-
-let q =
-questions[currentQuestion];
-
-
-
-progress.innerHTML =
-
-`Question ${currentQuestion+1} / 20`;
-
-
-
-questionBox.innerHTML =
-q.question;
-
-
-
-optionsBox.innerHTML="";
-
-
-
-
-
-q.options.forEach(option=>{
-
-
-let btn=document.createElement("button");
-
-
-btn.className="btn";
-
-
-btn.style.display="block";
-
-btn.style.margin="10px auto";
-
-btn.innerHTML=option;
-
-
-
-btn.onclick=()=>{
-
-
-answers[currentQuestion]=option;
-
-
-};
-
-
-
-optionsBox.appendChild(btn);
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-document
-.getElementById("next")
-.onclick=()=>{
-
-
-if(currentQuestion<19){
-
-currentQuestion++;
-
-showQuestion();
-
-}
-
-
-};
-
-
-
-
-
-
-document
-.getElementById("previous")
-.onclick=()=>{
-
-
-if(currentQuestion>0){
-
-currentQuestion--;
-
-showQuestion();
-
-}
-
-
-};
-
-
-
-
-
-
-
-
-
-// Timer
-
-
-let timer=setInterval(()=>{
-
-
-time--;
-
-
-let min=Math.floor(time/60);
-
-let sec=time%60;
-
-
-
-document.getElementById("timer")
-.innerHTML=
-
-`${min}:${sec<10?"0":""}${sec}`;
-
-
-
-
-
-if(time<=0){
-
-
-clearInterval(timer);
-
-alert("Time Over");
-
-window.location.href="result.html";
-
-
-}
-
-
-},1000);
-
-
-
-
-
-
-
-
-document
-.getElementById("submit")
-.onclick=()=>{
-
-
-localStorage.setItem(
-
-"answers",
-
-JSON.stringify(answers)
-
-);
-
-
-window.location.href="result.html";
-
-
-};
-
-
-
-
-
-</script>
+<script type="module" src="script.js"></script>
 
 
 </body>
