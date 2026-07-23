@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
@@ -26,7 +25,7 @@ G THE GENIUS | Result
 🛡️ G THE GENIUS
 
 <span>
-Exam Result
+Result Page
 </span>
 
 </div>
@@ -34,15 +33,12 @@ Exam Result
 
 <nav>
 
-<a href="index.html">
-Home
-</a>
+<a href="index.html">Home</a>
 
-<a href="leaderboard.html">
-Leaderboard
-</a>
+<a href="leaderboard.html">Rank</a>
 
 </nav>
+
 
 </header>
 
@@ -54,8 +50,9 @@ Leaderboard
 
 
 <h2>
-🏆 Your Mock Test Result
+🏆 Mock Test Result
 </h2>
+
 
 
 
@@ -70,7 +67,6 @@ Calculating...
 <p id="details"></p>
 
 
-
 <a href="mocktest.html" class="btn gold">
 Try Again
 </a>
@@ -81,18 +77,15 @@ Try Again
 
 
 
-
 <div class="glass-card">
 
 
 <h2>
-Answer Review
+Answer Explanation
 </h2>
 
 
-<div id="review">
-
-</div>
+<div id="review"></div>
 
 
 </div>
@@ -106,13 +99,43 @@ Answer Review
 
 
 
+<script type="module">
 
-<script>
+
+import {auth, db}
+from "./firebase-config.js";
+
+
+import {
+
+doc,
+setDoc
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+import {
+
+onAuthStateChanged
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
 
 
 let questions=[];
 
-let userAnswers=[];
+let answers=[];
 
 
 
@@ -126,11 +149,12 @@ fetch("questions.json")
 questions=data.slice(0,20);
 
 
-userAnswers=
+answers=
+
 JSON.parse(localStorage.getItem("answers")) || [];
 
 
-showResult();
+calculateResult();
 
 
 });
@@ -140,16 +164,18 @@ showResult();
 
 
 
-function showResult(){
+
+async function calculateResult(){
 
 
 let correct=0;
 
 
+
 questions.forEach((q,index)=>{
 
 
-if(userAnswers[index]===q.answer){
+if(answers[index]===q.answer){
 
 correct++;
 
@@ -160,21 +186,16 @@ correct++;
 
 
 
-let wrong =
-questions.length-correct;
 
+let wrong=
 
-
-let percentage =
-(correct/questions.length)*100;
-
-
+20-correct;
 
 
 
 document.getElementById("score").innerHTML=
 
-`Score : ${correct} / ${questions.length}`;
+`Score : ${correct}/20`;
 
 
 
@@ -182,33 +203,36 @@ document.getElementById("details").innerHTML=
 
 `
 Correct : ${correct}<br>
-Wrong : ${wrong}<br>
-Percentage : ${percentage.toFixed(2)}%
+Wrong : ${wrong}
 `;
 
 
 
 
 
-let review="";
+// Explanation
 
 
+let html="";
 
-questions.forEach((q,index)=>{
+
+questions.forEach((q,i)=>{
 
 
-review += `
+html +=
+
+`
 
 <div class="glass-card">
 
 <h3>
-${index+1}. ${q.question}
+${i+1}. ${q.question}
 </h3>
 
 
 <p>
 Your Answer:
-${userAnswers[index] || "Not Answered"}
+${answers[i] || "Not Answered"}
 </p>
 
 
@@ -228,18 +252,55 @@ ${q.explanation}
 
 `;
 
+});
+
+
+document.getElementById("review").innerHTML=html;
+
+
+
+
+
+// Save Firestore
+
+
+onAuthStateChanged(auth,async(user)=>{
+
+
+if(user){
+
+
+await setDoc(
+
+doc(db,"results",user.uid),
+
+{
+
+email:user.email,
+
+score:correct,
+
+total:20,
+
+date:new Date()
+
+}
+
+);
+
+
+console.log("Result Saved");
+
+
+}
 
 
 });
 
 
 
-
-document.getElementById("review").innerHTML=review;
-
-
-
 }
+
 
 
 </script>
