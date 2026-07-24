@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <title>
 G THE GENIUS | TNUSRB Mock Test
 </title>
 
+
 <link rel="stylesheet" href="style.css">
+
 
 </head>
 
@@ -18,43 +22,261 @@ G THE GENIUS | TNUSRB Mock Test
 <body>
 
 
-<header class="navbar">
+
+<!-- HEADER -->
+
+
+<header>
+
 
 <div class="logo">
-🛡️ G THE GENIUS
-<span>TNUSRB MOCK TEST</span>
+
+🚔 G THE GENIUS
+
 </div>
 
 
 <nav>
-<a href="index.html">Home</a>
-<a href="leaderboard.html">Rank</a>
+
+<a href="index.html">
+Home
+</a>
+
+
+<a href="mocktest.html">
+Mock Test
+</a>
+
+
+<a href="leaderboard.html">
+Leaderboard
+</a>
+
+
+<a href="login.html">
+Login
+</a>
+
+
 </nav>
+
 
 </header>
 
 
 
 
+
+<!-- MOCK TEST -->
+
+
 <section class="features">
 
 
+
 <h2>
-🚔 TNUSRB Online Examination
+
+📝 TNUSRB Online Mock Test
+
 </h2>
 
 
 
-<!-- Timer -->
 
-<div class="glass-card">
+
+<!-- STUDENT DETAILS -->
+
+
+<div class="card" id="studentBox">
+
+
 
 <h3>
-⏱️ Time Left :
-<span id="timer">
+
+👤 Student Details
+
+</h3>
+
+
+
+<input
+
+type="text"
+
+id="studentName"
+
+placeholder="Enter Your Name"
+
+>
+
+
+
+<input
+
+type="tel"
+
+id="mobile"
+
+placeholder="Enter Mobile Number"
+
+maxlength="10"
+
+>
+
+
+
+
+<input
+
+type="email"
+
+id="email"
+
+placeholder="Email (Optional)"
+
+>
+
+
+
+
+
+<select id="district">
+
+
+<option value="">
+
+Select District
+
+</option>
+
+
+<option>
+Chennai
+</option>
+
+<option>
+Coimbatore
+</option>
+
+
+<option>
+Madurai
+</option>
+
+
+<option>
+Salem
+</option>
+
+
+<option>
+Tiruppur
+</option>
+
+
+<option>
+Tiruchirappalli
+</option>
+
+
+<option>
+Tirunelveli
+</option>
+
+
+<option>
+Vellore
+</option>
+
+
+</select>
+
+
+
+
+
+<select id="examType">
+
+
+<option value="Police Constable">
+
+Police Constable
+
+</option>
+
+
+<option value="Fireman">
+
+Fireman
+
+</option>
+
+
+<option value="Jail Warder">
+
+Jail Warder
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+<button
+
+class="btn"
+
+id="startBtn"
+
+>
+
+🚀 START TEST
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- TEST AREA -->
+
+
+<div id="testArea"
+
+style="display:none;">
+
+
+
+
+
+<div class="card">
+
+
+<h3>
+
+⏱️ Remaining Time
+
+</h3>
+
+
+<h2 id="timer">
+
 20:00
-</span>
-</h3>
+
+</h2>
 
 
 </div>
@@ -63,43 +285,13 @@ G THE GENIUS | TNUSRB Mock Test
 
 
 
-<!-- Progress -->
-
-
-<div class="glass-card">
-
-<div id="progressBar">
-
-<div id="progress">
-
-0%
-
-</div>
-
-</div>
+<div id="questions">
 
 
 </div>
 
 
 
-
-
-
-<!-- Question Palette -->
-
-
-<div class="glass-card">
-
-
-<h3>
-Question Palette
-</h3>
-
-
-<div id="palette">
-
-</div>
 
 
 </div>
@@ -110,21 +302,70 @@ Question Palette
 
 
 
-<!-- Question -->
 
 
-<div class="glass-card">
+<!-- RESULT AREA -->
 
 
-<h2 id="question">
+<div id="resultArea"
 
-Loading Question...
+style="display:none;">
+
+
+
+
+
+<div class="card">
+
+
+
+<h2>
+
+🏆 Test Result
 
 </h2>
 
 
 
-<div id="options">
+<h3 id="studentResultName">
+
+</h3>
+
+
+
+<p id="studentResultDistrict">
+
+</p>
+
+
+
+<p id="studentResultExam">
+
+</p>
+
+
+
+
+<hr>
+
+
+
+
+<h2 id="finalScore">
+
+</h2>
+
+
+
+<h3 id="percentage">
+
+</h3>
+
+
+
+
+
+<div id="answerReview">
 
 </div>
 
@@ -132,37 +373,39 @@ Loading Question...
 
 
 
-<div style="margin-top:30px;">
 
-
-<button class="btn" id="previous">
-
-⬅ Previous
-
-</button>
+<br>
 
 
 
-<button class="btn gold" id="next">
+<a href="mocktest.html"
 
-Next ➡
+class="btn">
 
-</button>
+🔄 Take Again
+
+</a>
 
 
 
-<button class="btn" id="submit">
+<a href="index.html"
 
-Submit Exam
+class="btn2">
 
-</button>
+🏠 Home
+
+</a>
+
+
+
+</div>
+
+
 
 
 </div>
 
 
-
-</div>
 
 
 
@@ -172,7 +415,67 @@ Submit Exam
 
 
 
-<script type="module" src="script.js"></script>
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer>
+
+
+<div class="footer-content">
+
+
+<h2>
+
+🚔 G THE GENIUS
+
+</h2>
+
+
+<p>
+
+TNUSRB | Police Constable | Fireman | Jail Warder
+
+</p>
+
+
+
+<hr>
+
+
+
+<p>
+
+© 2026 G THE GENIUS. All Rights Reserved.
+
+</p>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+
+<!-- SCRIPT -->
+
+
+<script
+
+type="module"
+
+src="script.js">
+
+</script>
+
+
 
 
 </body>
