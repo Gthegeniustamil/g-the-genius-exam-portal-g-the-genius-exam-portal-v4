@@ -139,27 +139,59 @@ let answers=[];
 
 
 
-fetch("questions.json")
+import {
 
-.then(res=>res.json())
+collection,
+getDocs
 
-.then(data=>{
+}
 
+from
 
-questions=data.slice(0,20);
-
-
-answers=
-
-JSON.parse(localStorage.getItem("answers")) || [];
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-calculateResult();
+
+async function loadResult(){
+
+
+const snapshot = await getDocs(
+collection(db,"questions")
+);
+
+
+
+questions=[];
+
+
+snapshot.forEach((doc)=>{
+
+
+questions.push(doc.data());
 
 
 });
 
 
+
+questions = questions.slice(0,20);
+
+
+
+answers =
+
+JSON.parse(localStorage.getItem("userAnswers")) || [];
+
+
+
+calculateResult();
+
+
+}
+
+
+
+loadResult();
 
 
 
