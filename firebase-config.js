@@ -1,81 +1,31 @@
-// =====================================
-// G THE GENIUS EXAM PORTAL
-// FIREBASE CONFIG
-// =====================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import { initializeApp } from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-import { 
-getAuth 
-} from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-import { 
-getFirestore 
-} from 
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-
-// PASTE YOUR FIREBASE DETAILS HERE
 
 const firebaseConfig = {
 
+  apiKey: "AIzaSyAapQ1fRLiFQ6zcd5gFUpvcXfQBVBSdeH8",
 
-apiKey: "YOUR_API_KEY",
+  authDomain: "g-the-genius-tnusrb-portal.firebaseapp.com",
 
+  projectId: "g-the-genius-tnusrb-portal",
 
-authDomain: "YOUR_PROJECT.firebaseapp.com",
+  storageBucket: "g-the-genius-tnusrb-portal.firebasestorage.app",
 
+  messagingSenderId: "749969114917",
 
-projectId: "YOUR_PROJECT_ID",
-
-
-storageBucket: "YOUR_PROJECT.appspot.com",
-
-
-messagingSenderId: "YOUR_SENDER_ID",
-
-
-appId: "YOUR_APP_ID"
-
+  appId: "1:749969114917:web:5c61bcb7c8da98fef2bccc"
 
 };
 
-
-
-
-// Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
 
-
-
-// Authentication
-
 const auth = getAuth(app);
-
-
-
-// Firestore Database
 
 const db = getFirestore(app);
 
-
-
-
-// Export
-
-export {
-
-app,
-
-auth,
-
-db
-
-};
+export { app, auth, db };
