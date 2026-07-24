@@ -135,10 +135,312 @@ startTimer();
 
 }
 
-// இங்கிருந்து நான் கொடுத்த
-// questions
-// timer
-// palette
-// answer save
-// submit code
-// paste செய்யவும்
+// ===============================
+// QUESTION PALETTE
+// ===============================
+
+
+function createPalette(){
+
+
+palette.innerHTML="";
+
+
+for(let i=0;i<questions.length;i++){
+
+
+let btn=document.createElement("button");
+
+
+btn.innerHTML=i+1;
+
+
+btn.className="btn";
+
+
+btn.onclick=()=>{
+
+
+currentQuestion=i;
+
+showQuestion();
+
+
+};
+
+
+palette.appendChild(btn);
+
+
+}
+
+
+}
+
+
+
+
+
+// ===============================
+// SHOW QUESTION
+// ===============================
+
+
+function showQuestion(){
+
+
+let q=questions[currentQuestion];
+
+
+questionBox.innerHTML=
+
+`${currentQuestion+1}. ${q.question}`;
+
+
+optionsBox.innerHTML="";
+
+
+
+q.options.forEach(option=>{
+
+
+let button=document.createElement("button");
+
+
+button.className="btn";
+
+
+button.innerHTML=option;
+
+
+button.style.display="block";
+
+button.style.margin="10px auto";
+
+
+
+button.onclick=()=>{
+
+
+userAnswers[currentQuestion]=option;
+
+
+showQuestion();
+
+
+};
+
+
+
+optionsBox.appendChild(button);
+
+
+
+});
+
+
+updateProgress();
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// NEXT BUTTON
+// ===============================
+
+
+document.getElementById("next")
+?.addEventListener("click",()=>{
+
+
+if(currentQuestion < questions.length-1){
+
+
+currentQuestion++;
+
+
+showQuestion();
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+// ===============================
+// PREVIOUS BUTTON
+// ===============================
+
+
+document.getElementById("previous")
+?.addEventListener("click",()=>{
+
+
+if(currentQuestion>0){
+
+
+currentQuestion--;
+
+
+showQuestion();
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+// ===============================
+// PROGRESS BAR
+// ===============================
+
+
+function updateProgress(){
+
+
+let percent =
+
+((currentQuestion+1)/questions.length)*100;
+
+
+
+const progress =
+document.getElementById("progress");
+
+
+
+if(progress){
+
+
+progress.style.width =
+percent+"%";
+
+
+progress.innerHTML =
+Math.round(percent)+"%";
+
+
+}
+
+
+}
+
+// ===============================
+// TIMER
+// ===============================
+
+
+function startTimer(){
+
+
+const timerBox =
+document.getElementById("timer");
+
+
+timer=setInterval(()=>{
+
+
+totalTime--;
+
+
+let minutes =
+Math.floor(totalTime/60);
+
+
+let seconds =
+totalTime%60;
+
+
+
+if(timerBox){
+
+
+timerBox.innerHTML =
+
+`${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+
+}
+
+
+
+if(totalTime <= 0){
+
+
+clearInterval(timer);
+
+
+submitExam();
+
+
+}
+
+
+
+},1000);
+
+
+}
+
+
+
+
+
+
+// ===============================
+// SUBMIT EXAM
+// ===============================
+
+
+document.getElementById("submit")
+?.addEventListener("click",()=>{
+
+
+submitExam();
+
+
+});
+
+
+
+
+
+function submitExam(){
+
+
+clearInterval(timer);
+
+
+
+localStorage.setItem(
+
+"userAnswers",
+
+JSON.stringify(userAnswers)
+
+);
+
+
+
+window.location.href="result.html";
+
+
+}
