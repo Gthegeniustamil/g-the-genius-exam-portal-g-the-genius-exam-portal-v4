@@ -110,6 +110,7 @@ import {
 
 doc,
 setDoc,
+getDoc,
 collection,
 getDocs
 
@@ -287,6 +288,21 @@ onAuthStateChanged(auth,async(user)=>{
 
 if(user){
 
+const studentSnap = await getDoc(
+doc(db,"students",user.uid)
+);
+
+
+let studentName = "Student";
+
+
+if(studentSnap.exists()){
+
+studentName = studentSnap.data().name;
+
+}
+
+
 
 await setDoc(
 
@@ -294,7 +310,7 @@ doc(db,"results",user.uid),
 
 {
 
-name: user.displayName || "Student",
+name: studentName,
 
 email:user.email,
 
@@ -307,6 +323,8 @@ date:new Date()
 }
 
 );
+
+}
 
 
 console.log("Result Saved");
