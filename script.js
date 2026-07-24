@@ -14,7 +14,9 @@ import { db, auth } from "./firebase-config.js";
 import {
   collection,
   getDocs,
-  addDoc
+  addDoc,
+  query,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ===============================
@@ -596,15 +598,6 @@ function showExplanation() {
 // UPDATE SHOW RESULT
 // ===============================
 
-const oldShowResult = showResult;
-
-showResult = function () {
-
-    oldShowResult();
-
-    loadRanks();
-
-};
 
 // =====================================================
 // PART 7
