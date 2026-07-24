@@ -488,7 +488,8 @@ function showResult() {
         student.percentage +
         "%";
 
-    showExplanation();
+showExplanation();
+loadRanks();
 
 }
 
