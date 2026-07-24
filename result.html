@@ -133,22 +133,27 @@ from
 
 
 
-let questions=[];
-
-let answers=[];
-
+let questions = [];
+let answers = [];
 
 
+async function loadResult(){
 
 
-questions=[];
+const snapshot = await getDocs(
+
+collection(db,"questions")
+
+);
+
+
+
+questions = [];
 
 
 snapshot.forEach((doc)=>{
 
-
 questions.push(doc.data());
-
 
 });
 
@@ -158,9 +163,9 @@ questions = questions.slice(0,20);
 
 
 
-answers =
-
-JSON.parse(localStorage.getItem("userAnswers")) || [];
+answers = JSON.parse(
+localStorage.getItem("userAnswers")
+) || [];
 
 
 
@@ -168,7 +173,6 @@ calculateResult();
 
 
 }
-
 
 
 loadResult();
